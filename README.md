@@ -4,18 +4,21 @@ A Python + Playwright utility for downloading judgment PDFs from supported India
 
 ## Important
 
-This repository contains the **original working V4 baseline**.
-
-It is intentionally kept separate from later experimental multi-court or Act-detection versions.
+This repository incrementally extends the **working V4 baseline** with a conservative
+multi-court batch workflow. Act detection is intentionally not included.
 
 ## Main Features
 
 - Playwright-based browser automation
 - Manual CAPTCHA workflow
-- High Court / bench selection
+- Selection of one to six High Court/bench entries per batch
+- Isolated browser context per selected court
+- Open-all-first, then sequential court processing after one confirmation
 - Judgment-only PDF downloading
 - Pagination handling
 - Existing PDF skip logic
+- Successful-URL duplicate protection and bounded download retries
+- Optional minimum PDF page count (`MIN_PDF_PAGES`, default `1`)
 - Court/date-wise output folders
 - Download report generation
 - CSV download log
@@ -34,7 +37,7 @@ This project does not attempt to bypass, solve, OCR, or circumvent CAPTCHA.
 - Windows 10/11 recommended
 - Python 3.10+
 - Google Chrome or Microsoft Edge
-- Playwright
+- Playwright and PyMuPDF (page parsing is used only when `MIN_PDF_PAGES > 1`)
 
 Install dependencies:
 
