@@ -16,23 +16,9 @@ if errorlevel 1 (
     exit /b 1
 )
 
-py -c "import playwright" >nul 2>&1
-if errorlevel 1 (
-    echo Installing Playwright...
-    py -m pip install "playwright>=1.55.0"
-    if errorlevel 1 goto :fail
-) else (
-    echo Playwright already installed.
-)
-
-py -c "import PyInstaller" >nul 2>&1
-if errorlevel 1 (
-    echo Installing PyInstaller...
-    py -m pip install "pyinstaller>=6.10.0"
-    if errorlevel 1 goto :fail
-) else (
-    echo PyInstaller already installed.
-)
+echo Installing/updating required Python packages...
+py -m pip install -r requirements.txt
+if errorlevel 1 goto :fail
 
 echo.
 echo Checking V4 syntax...
